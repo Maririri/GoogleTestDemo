@@ -1,0 +1,34 @@
+Index: googletest/include/gtest/internal/gtest-port.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- googletest/include/gtest/internal/gtest-port.h	(revision ff07a5de0e81580547f1685e101194ed1a4fcd56)
++++ googletest/include/gtest/internal/gtest-port.h	(date 1558095985930)
+@@ -604,7 +604,7 @@
+     || GTEST_OS_QNX || GTEST_OS_FREEBSD || GTEST_OS_NACL)
+ #endif  // GTEST_HAS_PTHREAD
+ 
+-#if GTEST_HAS_PTHREAD
++#if GTEST_HAS_PTHREAD && !GTEST_OS_WINDOWS_MINGW
+ // gtest-port.h guarantees to #include <pthread.h> when GTEST_HAS_PTHREAD is
+ // true.
+ # include <pthread.h>  // NOLINT
+@@ -1441,7 +1441,7 @@
+ 
+ // Defines synchronization primitives.
+ #if GTEST_IS_THREADSAFE
+-# if GTEST_HAS_PTHREAD
++# if GTEST_HAS_PTHREAD && !GTEST_OS_WINDOWS_MINGW
+ // Sleeps for (roughly) n milliseconds.  This function is only for testing
+ // Google Test's own constructs.  Don't use it in user tests, either
+ // directly or indirectly.
+@@ -1458,7 +1458,7 @@
+ // Notification has already been imported into the namespace.
+ // Nothing to do here.
+ 
+-# elif GTEST_HAS_PTHREAD
++# elif GTEST_HAS_PTHREAD && !GTEST_OS_WINDOWS_MINGW
+ // Allows a controller thread to pause execution of newly created
+ // threads until notified.  Instances of this class must be created
+ // and destroyed in the controller thread.
